@@ -1,0 +1,13 @@
+{
+"group":"PolyTrace",
+"libs":["libsqlite3.tbd","libxml2.tbd","libz.tbd","libstdc++.tbd","libc++.tbd"],
+"frameworks":["SafariServices.framework","WebKit.framework"],
+"headerpaths":[],
+"folders":[],
+"excludes":["^.*.meta$","^.*.mdown$","^.*.pdf$"],
+"compiler_flags":[],
+"linker_flags":[],
+"embed_binaries":[],
+"plist":{},
+"files":["/IOS/TraceAnalysisSDK.framework"]
+}
