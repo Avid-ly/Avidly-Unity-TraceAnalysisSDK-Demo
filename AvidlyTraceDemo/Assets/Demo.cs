@@ -8,7 +8,7 @@ using UPTrace;
 public class Demo : MonoBehaviour, IAppsFlyerConversionData
 {
     //Demo ID please contact avidly project mangager for your ID
-    private const string PRODUCTID = "600258";
+    private const string PRODUCTID = "xxxxxx";
     private const string CHANNELID = "xxxxx";
 
 
