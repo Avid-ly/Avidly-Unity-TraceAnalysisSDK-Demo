@@ -1,22 +1,22 @@
 <dependencies>
   <packages>
+    <package>com.aly.sdk:tasdk:4.1.1.1</package>
     <package>com.android.installreferrer:installreferrer:2.1</package>
+    <package>com.android.installreferrer:installreferrer:2.2</package>
     <package>com.appsflyer:af-android-sdk:6.2.0</package>
     <package>com.appsflyer:unity-wrapper:6.2.0</package>
+    <package>com.google.android.gms:play-services-base:17.3.0</package>
   </packages>
-  <files>
-    <file>Assets/Plugins/Android/com.android.installreferrer.installreferrer-2.1.aar</file>
-    <file>Assets/Plugins/Android/com.appsflyer.af-android-sdk-6.2.0.aar</file>
-    <file>Assets/Plugins/Android/com.appsflyer.oaid-6.1.2.aar</file>
-    <file>Assets/Plugins/Android/com.appsflyer.unity-wrapper-6.2.0.aar</file>
-  </files>
+  <files />
   <settings>
     <setting name="androidAbis" value="armeabi-v7a" />
     <setting name="bundleId" value="com.mmmm.test" />
     <setting name="explodeAars" value="True" />
     <setting name="gradleBuildEnabled" value="True" />
-    <setting name="gradleTemplateEnabled" value="False" />
+    <setting name="gradlePropertiesTemplateEnabled" value="True" />
+    <setting name="gradleTemplateEnabled" value="True" />
     <setting name="installAndroidPackages" value="True" />
+    <setting name="localMavenRepoDir" value="Assets/GeneratedLocalRepo" />
     <setting name="packageDir" value="Assets/Plugins/Android" />
     <setting name="patchAndroidManifest" value="True" />
     <setting name="patchMainTemplateGradle" value="True" />

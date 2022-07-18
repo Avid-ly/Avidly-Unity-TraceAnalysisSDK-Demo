@@ -1,0 +1,20 @@
+<dependencies>
+   <androidPackages>
+   <androidPackage spec="com.aly.sdk:tasdk:4.1.1.1">
+        <repositories>
+            <repository>https://mvn-bx.dataverse.cn/repository/maven-releases/</repository>
+        </repositories>
+   </androidPackage>
+      <androidPackage spec="com.google.android.gms:play-services-base:17.3.0" />
+      <androidPackage spec="com.android.installreferrer:installreferrer:2.2" />
+</androidPackages>
+    
+  <iosPods>
+    <iosPod name="TASDK" version="4.1.0.7" minTargetSdk="10.0">
+      <sources>
+        <source>https://github.com/Avid-ly/iOS-CocoaPods-Spec.git</source>
+      </sources>
+    </iosPod>
+  </iosPods>
+</dependencies>
+

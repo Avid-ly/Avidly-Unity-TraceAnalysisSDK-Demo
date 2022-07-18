@@ -1,12 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using AppsFlyerSDK;
 using UnityEngine;
 using UPTrace;
+
 public class Demo : MonoBehaviour, IAppsFlyerConversionData
 {
     //Demo ID please contact avidly project mangager for your ID
-    private const string PRODUCTID = "xxxxxx";
+    private const string PRODUCTID = "600258";
     private const string CHANNELID = "xxxxx";
 
 
@@ -26,10 +28,11 @@ public class Demo : MonoBehaviour, IAppsFlyerConversionData
             string afid = AppsFlyer.getAppsFlyerId();
             // 获取openId
             string openId = UPTraceApi.getOpenId();
-            if (afid == null || afid == "" || openId == null || openId == "")
+            if (string.IsNullOrEmpty(afid) || openId == null || openId == "")
             {
                 return;
             }
+
             Debug.Log("afid=" + afid);
             Debug.Log("openId=" + openId);
 
@@ -70,12 +73,9 @@ public class Demo : MonoBehaviour, IAppsFlyerConversionData
 
         //iOS 延迟调用上报，目的是确保首次上报在ATT弹窗获得结果之后
 #if UNITY_IOS && !UNITY_EDITOR
- 
         AppsFlyeriOS.waitForATTUserAuthorizationWithTimeoutInterval(60);
 #endif
         AppsFlyer.startSDK();
-
-
     }
 
     public void LogEvent()
@@ -112,39 +112,28 @@ public class Demo : MonoBehaviour, IAppsFlyerConversionData
         }
     }
 
-    public static string GetAndroidID()
+    private void Start()
     {
-        string _strAndroidID = "none";
-        if (string.IsNullOrEmpty(_strAndroidID))
+        print("android ===> " + GetAndroidID());
+    }
+
+    private String GetAndroidID()
+    {
+        try
         {
-            _strAndroidID = "none";
-            try
-            {
-                using (AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
-                {
-                    using (AndroidJavaObject currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity"))
-                    {
-                        using (AndroidJavaObject contentResolver = currentActivity.Call<AndroidJavaObject>("getContentResolver"))
-                        {
-                            using (AndroidJavaClass secure = new AndroidJavaClass("android.provider.Settings$Secure"))
-                            {
-                                _strAndroidID = secure.CallStatic<string>("getString", contentResolver, "android_id");
-                                if (string.IsNullOrEmpty(_strAndroidID))
-                                {
-                                    _strAndroidID = "none";
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch (System.Exception e)
-            {
-            }
-            return _strAndroidID;
+            AndroidJavaClass up = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+            AndroidJavaObject currentActivity = up.GetStatic<AndroidJavaObject>("currentActivity");
+            AndroidJavaObject contentResolver = currentActivity.Call<AndroidJavaObject>("getContentResolver");
+            AndroidJavaClass secure = new AndroidJavaClass("android.provider.Settings$Secure");
+            string android_id = secure.CallStatic<string>("getString", contentResolver, "android_id");
+            return android_id;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
         }
 
-        return _strAndroidID;
+        return "";
     }
 
     //AF归因回调--start
@@ -186,11 +175,10 @@ public class Demo : MonoBehaviour, IAppsFlyerConversionData
     {
         Debug.Log("===> onConversionDataSuccess Callback at: " + result);
     }
+
     private void onAvidlyConversionDataFail(string result)
     {
         Debug.Log("===> onConversionDataFail Callback at: " + result);
     }
     //Avidly 用户标签回调--end
 }
-
-
